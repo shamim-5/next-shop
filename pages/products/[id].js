@@ -1,6 +1,7 @@
 import Title from "@/components/Title";
 import { ApiError } from "@/lib/api";
 import { getProduct, getProducts } from "@/lib/products";
+import Image from "next/image";
 
 const { default: Head } = require("next/head");
 
@@ -35,11 +36,19 @@ function ProductPage({ product }) {
   return (
     <>
       <Head>
-        <title>Next Shop</title>
+        <title>{product.title}</title>
       </Head>
       <main className="px-6 py-4">
         <Title>{product.title}</Title>
-        <p>{product.description}</p>
+        <div className="flex flex-col lg:flex-row">
+          <div>
+            <Image src={product.pictureUrl} alt="" width={640} height={480} />
+          </div>
+          <div className="flex-1 lg:ml-4">
+            <p className="text-sm">{product.description}</p>
+            <p className="text-lg font-bold mt-2">{product.price}</p>
+          </div>
+        </div>
       </main>
     </>
   );

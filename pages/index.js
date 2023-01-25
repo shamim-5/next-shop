@@ -1,15 +1,14 @@
 import { getProducts } from "@/lib/products";
 import Head from "next/head";
+import Link from "next/link";
 
 export async function getStaticProps() {
   console.log("[Homepage] getStaticProps()]");
   const products = await getProducts();
 
   return {
-    props: {
-      products,
-    },
-    revalidate: 5 * 30, //seconds
+    props: { products },
+    // revalidate: 30, //seconds
   };
 }
 
@@ -25,7 +24,9 @@ function HomePage({ products }) {
         <h1>Next Shop</h1>
         <ul>
           {products.map((product) => (
-            <li key={product.id}>{product.title}</li>
+            <li key={product.id}>
+              <Link href={`/products/${product.id}`}>{product.title}</Link>
+            </li>
           ))}
         </ul>
       </main>

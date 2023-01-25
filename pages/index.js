@@ -1,3 +1,4 @@
+import Title from "@/components/Title";
 import { getProducts } from "@/lib/products";
 import Head from "next/head";
 import Link from "next/link";
@@ -8,7 +9,7 @@ export async function getStaticProps() {
 
   return {
     props: { products },
-    // revalidate: 30, //seconds
+    revalidate: parseInt(process.env.REVALIDATE_SECONDS), //seconds
   };
 }
 
@@ -21,7 +22,7 @@ function HomePage({ products }) {
         <title>Next Shop</title>
       </Head>
       <main className="px-6 py-4">
-        <h1>Next Shop</h1>
+        <Title>Next Shop</Title>
         <ul>
           {products.map((product) => (
             <li key={product.id}>

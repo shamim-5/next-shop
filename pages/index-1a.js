@@ -1,3 +1,4 @@
+// Option 1a: fetch products on the server side (in getStaticProps)
 import { getProducts } from "@/lib/products";
 import Head from "next/head";
 
@@ -9,7 +10,6 @@ export async function getStaticProps() {
     props: {
       products,
     },
-    revalidate: 5 * 30, //seconds
   };
 }
 

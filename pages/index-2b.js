@@ -1,21 +1,20 @@
-import { getProducts } from "@/lib/products";
+// Option 2: fetch products on the client side (in useEffect)
+// from an internal API route
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
-export async function getStaticProps() {
-  console.log("[Homepage] getStaticProps()]");
-  const products = await getProducts();
+function HomePage() {
+  const [products, setProducts] = useState([]);
 
-  return {
-    props: {
-      products,
-    },
-    revalidate: 5 * 30, //seconds
-  };
-}
+  useEffect(() => {
+    (async () => {
+      const response = await fetch("/api/products");
+      const products = await response.json();
+      setProducts(products);
+    })();
+  }, []);
 
-function HomePage({ products }) {
   console.log("[HomePage] render:", products);
-
   return (
     <>
       <Head>

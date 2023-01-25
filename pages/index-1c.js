@@ -1,15 +1,15 @@
+// Option 1c: fetch products on the server side (in getServerSideProps)
 import { getProducts } from "@/lib/products";
 import Head from "next/head";
 
-export async function getStaticProps() {
-  console.log("[Homepage] getStaticProps()]");
+export async function getServerSideProps() {
+  console.log("[Homepage] getServerSideProps()]");
   const products = await getProducts();
 
   return {
     props: {
       products,
     },
-    revalidate: 5 * 30, //seconds
   };
 }
 
